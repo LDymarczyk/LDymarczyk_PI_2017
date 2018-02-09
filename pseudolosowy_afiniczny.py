@@ -12,7 +12,7 @@ def to_bin(x):
         x /= 2
     return a[::-1]
 
-def more_bite(x):
+def more_byte(x):
     """
     Inputs:
     x - intiger number
@@ -30,7 +30,7 @@ def more_bite(x):
     else:
         return "0"
 
-def xor_bite(x):
+def xor_byte(x):
     """
     Inputs:
     x - intiger number
