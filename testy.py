@@ -1,117 +1,142 @@
-def TestPojedynczegoBitu(i,nazwa,plik_out):
-    print nazwa
-    w=0
-    plik_o1=open(plik_out+"2.txt",'a')
-    plik_o0=open(plik_out+"1.txt",'a')
-    plik_o1.write(str(i)+'\t')
-    plik=open(nazwa,'r').read()
+def TestPojedynczegoBitu(plik):
+    """
+    Inputs:
+    plik - string of 20.000 bytes
+    ------------------
+    Output:
+    Tuple of strings:
+    first element is boolean value "T" if test was succesfull "F" if test failed
+    second element is value of the Monobit Test
+    """
+    w = 0
     for i in range(20000):
-        if plik[i]=='1':w+=1
-    plik_o1.write(str(w)+'\t')
-    print str(w)
+        if plik[i] == '1': w += 1
     if w>9725 and w<10275:
-        plik_o0.write("T"+' ')
-        return True
-    plik_o0.write("F"+' ')
-    return False
+        return ("T", str(w))
+    return ("F",str(w))
 
 def decym(n):
-    k,w=8,0
+    k, w= 8, 0
     for i in range(4):
-        w+=int(n[i])*k
-        k/=2
+        w += int(n[i]) * k
+        k /= 2
     return w
 
-def TestPokerowy(nazwa,plik_out):
-    plik_o1=open(plik_out+"2.txt",'a')
-    plik_o0=open(plik_out+"1.txt",'a')
-    plik=open(nazwa,'r').read()
-    liczby=[]
-    for i in range(0,20000,4):
+def TestPokerowy(plik):
+    """
+    Inputs:
+    plik - string of 20.000 bytes
+    ------------------
+    Output:
+    Tuple of strings:
+    first element is boolean value "T" if test was succesfull "F" if test failed
+    second element is value of the Frequency Test within a Block
+    """
+    liczby = []
+    for i in range(0, 20000, 4):
         try:
-            a=decym(plik[i]+plik[i+1]+plik[i+2]+plik[i+3])
+            a = decym(plik[i] + plik[i+1] + plik[i+2] + plik[i+3])
             liczby.append(a)
         except:
-            print g[i]+g[i+1]+g[i+2]+g[i+3]
+            print g[i] + g[i+1] + g[i+2] + g[i+3]
             break
-    w=0
+    w = 0
     for i in range(16):
-        w+=(liczby.count(i))**2
-    w=(float(w)*16/5000)-5000
-    plik_o1.write(str(w)+"\t")
-    if w>2.16 and w<47.6:
-        plik_o0.write("T"+' ')
-        return True
-    plik_o0.write("F"+' ')
-    return False
+        w += (liczby.count(i)) ** 2
+    w = (float(w) * 16 / 5000) - 5000
+    if w > 2.16 and w < 47.6:
+        return ("T", str(w))
+    return ("F" , str(w))
 
-def Serie(nazwa,plik_out):
-    plik=open(nazwa,'r').read()
-    serie={}
-    ln=0
-    for i in range(0,20000):
-        if plik[i]=="0":
-            ln+=1
-            if i==19999:
-                if ln in serie.keys(): serie[ln]+=1
-                else: serie[ln]=1
+def Serie(plik):
+    serie = {}
+    ln = 0
+    for i in range(0, 20000):
+        if plik[i] == "0":
+            ln += 1
+            if i == 19999:
+                if ln in serie.keys(): serie[ln] += 1
+                else: serie[ln] = 1
                 ln=0
-            elif plik[i+1]=="1":
-                if ln in serie.keys(): serie[ln]+=1
-                else: serie[ln]=1
-                ln=0
+            elif plik[i+1] == "1":
+                if ln in serie.keys(): serie[ln] += 1
+                else: serie[ln] = 1
+                ln = 0
     return serie
 
-akceptacja=[(2315,2685),(1114,1386),(527,723),(240,384),(103,209),(103,209)]
+akceptacja = [(2315,2685), (1114,1386), (527,723), (240,384), (103,209), (103,209)]
 
-def TestSerii(nazwa,plik_out):
-    plik_o0=open(plik_out+"1.txt",'a')
-    plik_o1=open(plik_out+"2.txt",'a')
-    serie=Serie(nazwa,plik_out)
-    klucze=serie.keys()
-    w=0
+def TestSerii(plik):
+    """
+    Inputs:
+    plik - string of 20.000 bytes
+    ------------------
+    Output:
+    Tuple of strings:
+    first element is boolean value "T" if test was succesfull "F" if test failed
+    second element is value of the Runs Test
+    """
+    serie = Serie(plik)
+    klucze = serie.keys()
+    w, k = 0, 0
     out=""
-    for i in range(1,6):
+    for i in range(1, 6):
         if i in klucze:
-            out+=str(serie[i])+"\t"
-            if serie[i]>akceptacja[i][0] and serie[i]<akceptacja[i][1]:
-                w+=1
-            #print out
-    #print out
-    plik_o1.write(out)
-    k=0
-    for i in range(6,max(max(klucze)+1,7)):
+            out += str(serie[i]) + "\t"
+            if serie[i] > akceptacja[i][0] and serie[i] < akceptacja[i][1]:
+                w += 1
+    k = 0
+    for i in range(6, max(max(klucze) + 1, 7)):
         if i in klucze:
-            k+=serie[i]
-    plik_o1.write(str(k)+'\t')
-    if k>103 and k<209: w+=1
-    if w==6:
-        plik_o0.write("T"+' ')
-        return True
-    plik_o0.write("F"+' ')
-    return False
+            k += serie[i]
+    out += str(k)
+    if k > 103 and k < 209: w += 1
+    if w == 6:
+        return ("T", str(out))
+    return ("F", str(out))
 
-def TestNajdluzszejSerii(nazwa,plik_out):
-    serie=Serie(nazwa,plik_out)
-    plik_o0=open(plik_out+"1.txt",'a')
-    plik_o1=open(plik_out+"2.txt",'a')
-    plik_o1.write(str(max(serie.keys()))+'\n')
-    if max(serie.keys())<26:
-        plik_o0.write("T"+'\n')
-        return True
-    plik_o0.write("F"+'\n')
-    return False
+def TestNajdluzszejSerii(nazwa):
+    """
+    Inputs:
+    plik - string of 20.000 bytes
+    ------------------
+    Output:
+    Tuple of strings:
+    first element is boolean value "T" if test was succesfull "F" if test failed
+    second element is value of the Test for the Longest Run
+    """
+    serie = Serie(nazwa)
+    w = (str(max(serie.keys())))
+    if max(serie.keys()) < 26:
+        return ("T", str(w))
+    return ("F", str(w))
 
 def generuj_wyniki(plik_in, plik_out, m):
-    plik_o0=open(plik_out+"1.txt",'w')
-    plik_o1=open(plik_out+"2.txt",'w')
-    plik_o1.write("\tPojBit\tPok\tS1\tS2\tS3\tS4\tS5\tS>5\tNS\n")
-    plik_o1.close()
+    """
+    Inputs:
+    plik_in - string, name of the file with generated bytes, only the prefix without sumple number
+    plik_out - string, name of final file, where will be save the results of tests
+    m - number of sumples
+    ------------------
+    Output:
+    None
+    """
+    plik_o0 = open(plik_out+"1.txt", 'w')
+    plik_o1 = open(plik_out+"2.txt", 'w')
+    p1 = "\tPojBit\tPok\tS1\tS2\tS3\tS4\tS5\tS>5\tNS\n"
+    p2 = ""
     for i in range(m):
-        TestPojedynczegoBitu(i+1,plik_in+str(i+1)+".txt",plik_out)
-        TestPokerowy(plik_in+str(i+1)+".txt",plik_out)
-        TestSerii(plik_in+str(i+1)+".txt",plik_out)
-        TestNajdluzszejSerii(plik_in+str(i+1)+".txt",plik_out)
+        pi = open(plik_in+str(i+1)+".txt", "r").read()
+        res1 = TestPojedynczegoBitu(pi)
+        res2 = TestPokerowy(pi)
+        res3 = TestSerii(pi)
+        res4 = TestNajdluzszejSerii(pi)
+        p2 += str(i+1) + "\t" + res1[0] + "\t" + res2[0] + "\t" + res3[0] + "\t" + res4[0] + "\n"
+        p1 += str(i+1) + "\t" + res1[1] + "\t" + res2[1] + "\t" + res3[1] + "\t" + res4[1] + "\n"
+    plik_o0.write(p1)
+    plik_o1.write(p2)
+    plik_o0.close()
+    plik_o1.close()
     
 
 ##generuj_wyniki("plik_mic","dane_mic",'\n',20)
