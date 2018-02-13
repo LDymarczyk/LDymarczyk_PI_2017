@@ -1,67 +1,107 @@
 import math
-import mpmath
-import scipy
 from scipy.special import gammaincc
 
-def blocks_count(n,m,word):
-    lista={}
-    for i in range(pow(2,m)):
-        e=bin(i)[2:]
-        lista["0"*(m-len(e))+e]=0
-    #print len(word)
-    for i in range(n):
-        a=word[i:i+m]
-##        print a
-        lista[a]+=1
-    return lista
-
-def psi_calc(n,m,word):
-    word+=word[:m-1]
-    print word
-    val=blocks_count(n,m,word).values()
-    #print val
-    ret=float(pow(2,m))/n
-    k=0
-    for i in range(pow(2,m)):
-        k+=pow(val[i],2)
-    return round(float(ret*k)-n,4)
-
-def PValues(n,m,word):
-    a=round(psi_calc(n,m,word)-psi_calc(n,m-1,word),4)
-    b=psi_calc(n,m,word)-2*psi_calc(n,m-1,word)+psi_calc(n,m-2,word)
-    b=round(b,4)
-    return(gammaincc(pow(2,m-2),a/2),gammaincc(pow(2,m-3),b/2))
-
-def SerialTest(filein,n,m):
-    #plik=open(filein,'r').read()
-    #sigma1=blocks_count(n,m,filein)
-    #sigma2=blocks_count(n,m-1,filein)
-    #print sigma1, sigma2
-    k=float(pow(2,m)/n)
-    return PValues(n,m,filein)
-
-def Entropy(word,n,m):
-    word+=word[:m-1]
-##    print word
-    val=blocks_count(n,m,word).values()
-##    print val
-    ret=0
-    for i in range(pow(2,m)):
-        if val[i]!=0:
-##            print float(val[i])/n,(math.log(float(val[i])/n))
-            ret+=float(val[i])/n*(math.log(float(val[i])/n))
-    return ret
-
-def ApEntropyTest(filein,n,m):
-##    print Entropy(filein,n,m)-Entropy(filein,n,m+1),math.log(2)
-    chi=2*n*(math.log(2)-(Entropy(filein,n,m)-Entropy(filein,n,m+1)))
-    return gammaincc(pow(2,m-1),chi/2)
-
-def SumBits(word,n):
+def blocks_count(n, m, word):
     """
     Inputs:
-    word - string of bits
-    n - integer, leght of word
+    n - integer, length of word
+    m - integer, length of block
+    word - string of bytes
+    --------------------------
+    Output:
+    dictionary, where keys are possible blocks and values are number of this blocks in word
+    """
+    lista = {}
+    for i in range(pow(2, m)):
+        e = bin(i)[2:]
+        lista["0" * (m-len(e)) + e] = 0
+    for i in range(n):
+        a = word[i: i + m]
+        lista[a] += 1
+    return lista
+
+def psi_calc(n, m, word):
+    """
+    Inputs:
+    n - integer, length of word
+    m - integer, length of block
+    word - string of bytes
+    --------------------------
+    Output:
+    float, value of psi function
+    """
+    word += word[ : m-1]
+    val = blocks_count(n, m, word).values()
+    ret = float(pow(2, m)) / n
+    k = 0
+    for i in range(pow(2, m)):
+        k += pow(val[i], 2)
+    return round(float(ret * k) - n, 4)
+
+def PValues(n, m, word):
+    """
+    Inputs:
+    n - integer, length of word
+    m - integer, length of block
+    word - string of bytes
+    --------------------------
+    Output:
+    float, value of incomplete gamma function with suitable parameters
+    """
+    a = round(psi_calc(n, m, word) - psi_calc(n, m-1, word), 4)
+    b = psi_calc(n, m, word) - 2 * psi_calc(n, m-1, word) + psi_calc(n, m-2, word)
+    b = round(b, 4)
+    return(gammaincc(pow(2, m-2), a / 2),gammaincc(pow(2, m - 3), b / 2))
+
+def SerialTest(filein, n, m):
+    """
+    Inputs:
+    n - integer, length of word
+    m - integer, length of block
+    filein - string of bytes
+    --------------------------
+    Output:
+    Tuple of two float values
+    """
+    k=float(pow(2, m) / n)
+    return PValues(n, m, filein)
+
+def Entropy(word, n, m):
+    """
+    Inputs:
+    n - integer, length of word
+    m - integer, length of block
+    word - string of bytes
+    --------------------------
+    Output:
+    folat, value of Entropy
+    """
+    word += word[ : m - 1]
+    val = blocks_count(n, m, word).values()
+    ret = 0
+    for i in range(pow(2, m)):
+        if val[i] != 0:
+            ret += float(val[i]) / n * (math.log(float(val[i]) / n))
+    return ret
+
+def ApEntropyTest(filein, n, m):
+    """
+    Inputs:
+    n - integer, length of word
+    m - integer, length of block
+    filein - string of bytes
+    --------------------------
+    Output:
+    float, value of Entropy Test
+    """
+    chi = 2 * n * (math.log(2) - (Entropy(filein, n, m) - Entropy(filein, n, m + 1)))
+    return gammaincc(pow(2, m - 1), chi / 2)
+
+def SumBits(word, n):
+    """
+    Inputs:
+    word - string of bytes
+    n - integer, length of word
     --------------------------
     Output:
     List of sums S0...Sn
@@ -74,40 +114,53 @@ def SumBits(word,n):
     ret+="0"
     return ret
 
-pi=[[0.5,0.2500,0.1250,0.0625,0.0312,0.0312],
-    [0.75,0.0625,0.0469,0.0352,0.0264,0.0791],
-    [0.8333,0.0278,0.0231,0.0193,0.0161,0.0804],
-    [0.875,0.0156,0.0137,0.012,0.0105,0.0733]]
+pi=[[0.5000, 0.2500, 0.1250, 0.0625, 0.0312, 0.0312],
+    [0.7500, 0.0625, 0.0469, 0.0352, 0.0264, 0.0791],
+    [0.8333, 0.0278, 0.0231, 0.0193, 0.0161, 0.0804],
+    [0.8750, 0.0156, 0.0137, 0.0120, 0.0105, 0.0733]]
 
-def CountSeries(sums,j):
-    numb=[-4,-3,-2,-1,1,2,3,4]
-    ret=[]
+def CountSeries(sums, j):
+    """
+    Inputs:
+    sums - List of intigers, sums S0...Sn, where n is number of bytes
+    j - integer, number of sums
+    --------------------------
+    Output:
+    List of 8 float values
+    """
+    numb = [-4, -3, -2, -1, 1, 2, 3, 4]
+    ret = [ ]
     for i in range(8):
-        numb_c=[0,0,0,0,0,0]
+        numb_c = [0, 0, 0, 0, 0, 0]
         for m in range(j):
-            v=sums[m].count(str(numb[i]))
-            if v>5: v=5
-            numb_c[v]+=1
+            v = sums[m].count(str(numb[i]))
+            if v > 5: v = 5
+            numb_c[v] += 1
             for g in range(v):
-                sums[m]=sums[m].replace(str(numb[i]),"")
-##            print numb[i], sums[m], v, numb_c
-##        print numb_c
-        s=0
+                sums[m] = sums[m].replace(str(numb[i]),"")
+        s = 0
         for k in range(6):
-            print numb_c[k],j,pi[int(math.fabs(numb[i]))-1][k],j,pi[int(math.fabs(numb[i]))-1][k]
-            s+=pow(numb_c[k]-j*pi[int(math.fabs(numb[i]))-1][k],2)/(j*pi[int(math.fabs(numb[i]))-1][k])
-        print s
+            s += pow(numb_c[k]-j*pi[int(math.fabs(numb[i]))-1][k],2)/(j*pi[int(math.fabs(numb[i]))-1][k])
         ret.append(s)
     return ret
                 
 
-def RanW(word,n):
-    sums=SumBits(word,n)
-    sums=sums.split("0")
+def RanW(word, n):
+    """
+    Inputs:
+    word - string of bytes
+    n - integer, length of word
+    --------------------------
+    Output:
+    List of 8 float values
+    """
+    List of sums S0...Sn
+    sums = SumBits(word, n)
+    sums = sums.split("0")
     for i in range(sums.count("")):
         sums.remove("")
-    j=len(sums)
-    ret=CountSeries(sums,j)
+    j = len(sums)
+    ret = CountSeries(sums, j)
     return ret
 
 ##print SerialTest("11010010011110010100",20,3)
