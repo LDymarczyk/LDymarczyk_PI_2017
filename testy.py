@@ -1,3 +1,5 @@
+from testy2 import SerialTest, ApEntropyTest, RanWTest
+
 def TestPojedynczegoBitu(plik):
     """
     Inputs:
@@ -83,14 +85,17 @@ def TestSerii(plik):
     for i in range(1, 6):
         if i in klucze:
             out += str(serie[i]) + "\t"
-            if serie[i] > akceptacja[i][0] and serie[i] < akceptacja[i][1]:
+            print i, serie[i], akceptacja[i-1][0], akceptacja[i][1], serie[i] > akceptacja[i][0], serie[i] < akceptacja[i][1]
+            if serie[i] > akceptacja[i-1][0] and serie[i] < akceptacja[i-1][1]:
                 w += 1
+                print i
     k = 0
     for i in range(6, max(max(klucze) + 1, 7)):
         if i in klucze:
             k += serie[i]
     out += str(k)
     if k > 103 and k < 209: w += 1
+    print w
     if w == 6:
         return ("T", str(out))
     return ("F", str(out))
@@ -121,18 +126,20 @@ def generuj_wyniki(plik_in, plik_out, m):
     Output:
     None
     """
-    plik_o0 = open(plik_out+"1.txt", 'w')
-    plik_o1 = open(plik_out+"2.txt", 'w')
-    p1 = "\tPojBit\tPok\tS1\tS2\tS3\tS4\tS5\tS>5\tNS\n"
-    p2 = ""
+    p1 = "\tPojBit\tPok\tS1\tS2\tS3\tS4\tS5\tS>5\tNS\tST1\tST2\tApEn\n"
+    p2 = "\tPojBit\tPok\tTS\tNS\tST\tApEn\n"
     for i in range(m):
         pi = open(plik_in+str(i+1)+".txt", "r").read()
         res1 = TestPojedynczegoBitu(pi)
         res2 = TestPokerowy(pi)
         res3 = TestSerii(pi)
         res4 = TestNajdluzszejSerii(pi)
-        p2 += str(i+1) + "\t" + res1[0] + "\t" + res2[0] + "\t" + res3[0] + "\t" + res4[0] + "\n"
-        p1 += str(i+1) + "\t" + res1[1] + "\t" + res2[1] + "\t" + res3[1] + "\t" + res4[1] + "\n"
+        res5 = SerialTest(pi, 20000, 3)
+        res6 = ApEntropyTest(pi, 20000,3)
+        p2 += str(i+1) + "\t" + res1[0] + "\t" + res2[0] + "\t" + res3[0] + "\t" + res4[0] + "\t" + res5[0] + "\t" + res6[0] + "\n"
+        p1 += str(i+1) + "\t" + res1[1] + "\t" + res2[1] + "\t" + res3[1] + "\t" + res4[1] + "\t" + res5[1] + res6[1] + "\n"
+    plik_o0 = open(plik_out+"1.txt", 'w')
+    plik_o1 = open(plik_out+"2.txt", 'w')
     plik_o0.write(p1)
     plik_o1.write(p2)
     plik_o0.close()

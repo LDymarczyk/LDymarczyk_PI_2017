@@ -63,8 +63,15 @@ def SerialTest(filein, n, m):
     Output:
     Tuple of two float values
     """
-    k=float(pow(2, m) / n)
-    return PValues(n, m, filein)
+    k = float(pow(2, m) / n)
+    values = PValues(n, m, filein)
+    t = "T"
+    ret = ""
+    for i in range(2):
+        if values[i] < 0.01:
+            t = "F"
+        ret += str(round(values[i], 2)) + "\t"
+    return (t, ret)
 
 def Entropy(word, n, m):
     """
@@ -95,7 +102,11 @@ def ApEntropyTest(filein, n, m):
     float, value of Entropy Test
     """
     chi = 2 * n * (math.log(2) - (Entropy(filein, n, m) - Entropy(filein, n, m + 1)))
-    return gammaincc(pow(2, m - 1), chi / 2)
+    ret = round(gammaincc(pow(2, m - 1), chi / 2),2)
+    t = "T"
+    if ret < 0.01:
+        t = "F"
+    return (t, str(ret))
 
 def SumBits(word, n):
     """
@@ -129,7 +140,7 @@ def CountSeries(sums, j):
     List of 8 float values
     """
     numb = [-4, -3, -2, -1, 1, 2, 3, 4]
-    ret = [ ]
+    ret = ""
     for i in range(8):
         numb_c = [0, 0, 0, 0, 0, 0]
         for m in range(j):
@@ -141,11 +152,11 @@ def CountSeries(sums, j):
         s = 0
         for k in range(6):
             s += pow(numb_c[k]-j*pi[int(math.fabs(numb[i]))-1][k],2)/(j*pi[int(math.fabs(numb[i]))-1][k])
-        ret.append(s)
+        ret += str(round(s, 2)) + "\t"
     return ret
                 
 
-def RanW(word, n):
+def RanWTest(word, n):
     """
     Inputs:
     word - string of bytes
@@ -154,18 +165,21 @@ def RanW(word, n):
     Output:
     List of 8 float values
     """
-    List of sums S0...Sn
     sums = SumBits(word, n)
     sums = sums.split("0")
     for i in range(sums.count("")):
         sums.remove("")
     j = len(sums)
     ret = CountSeries(sums, j)
-    return ret
+    t = "T"
+    for i in range(8):
+        if ret[i] < 0.01:
+            t = "F"
+    return (t, ret)
 
 ##print SerialTest("11010010011110010100",20,3)
 ##print SerialTest("0011011101",10,3)
 ##print SerialTest("1111111111",10,3)[0]<0.01
 ##print ApEntropyTest("0100110101",10,3)
-print RanW("0110110101",10)
+print RanWTest("0110110101",10)
 ##print pow(1-3*0.5,2)/(3*0.5)+pow(1-3*0.25,2)/(3*0.25)+pow(0-3*0.125,2)/(3*0.125)+pow(1-3*0.0625,2)/(3*0.0625)+pow(0-3*0.0312,2)/(3*0.0312)+pow(0-3*0.0312,2)/(3*0.0312)
