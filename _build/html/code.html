@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Wygenerowana automatycznie dokumentacja &mdash; Generatory losowe i pseudolosowe 1.0.0 documentation</title>
+    <title>Documantation &mdash; Generatory losowe i pseudolosowe 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,26 +50,73 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="wygenerowana-automatycznie-dokumentacja">
-<h1>Wygenerowana automatycznie dokumentacja<a class="headerlink" href="#wygenerowana-automatycznie-dokumentacja" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="documantation">
+<h1>Documantation<a class="headerlink" href="#documantation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="module-TRNG">
+<span id="true-random-number-generator"></span><h1>True Random Number Generator<a class="headerlink" href="#module-TRNG" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="TRNG.BintoInt">
+<tt class="descclassname">TRNG.</tt><tt class="descname">BintoInt</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#TRNG.BintoInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x - string of bytes</p>
+<p>Output:</p>
+<p>integer x</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TRNG.TRNG">
+<tt class="descclassname">TRNG.</tt><tt class="descname">TRNG</tt><big>(</big><em>m</em>, <em>k=1</em><big>)</big><a class="headerlink" href="#TRNG.TRNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>m - intiger, 2^m will be upper range of generated values</p>
+<p>k - integer, number of generated values</p>
+<p>m * k &lt; 20.001</p>
+<p>Output:</p>
+<p>list of x integers</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TRNG.TRNGalg">
+<tt class="descclassname">TRNG.</tt><tt class="descname">TRNGalg</tt><big>(</big><em>n</em>, <em>j</em>, <em>k</em><big>)</big><a class="headerlink" href="#TRNG.TRNGalg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - intiger, length of generated string of bytes</p>
+<p>j - integer, length of cycle (PRNG will make j bytes from one seed)</p>
+<p>k - integer, number of bytes in register</p>
+<p>where j &lt; 2*k, k &lt; n</p>
+<p>Output:</p>
+<p>string, generated n bytes</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-BBS_gen">
 <span id="generator-bbs"></span><h1>Generator BBS<a class="headerlink" href="#module-BBS_gen" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="BBS_gen.BBSgen">
-<tt class="descclassname">BBS_gen.</tt><tt class="descname">BBSgen</tt><big>(</big><em>x</em>, <em>n</em>, <em>k</em>, <em>file_name</em><big>)</big><a class="headerlink" href="#BBS_gen.BBSgen" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">BBS_gen.</tt><tt class="descname">BBSgen</tt><big>(</big><em>x</em>, <em>n</em>, <em>k</em>, <em>file_name</em>, <em>mode=2</em><big>)</big><a class="headerlink" href="#BBS_gen.BBSgen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inputs:</p>
 <p>x - intiger number, seed for generator</p>
 <p>n - intiger, length of generating string of bytes</p>
 <p>k - string, number added at the end of file name</p>
 <p>file_name - string, name of creating file with result</p>
+<p>mode - integer, 1 for bn - last byte, 2 for bn - xor all bytes, 3 for bn - compare number of bytes, 0 for receiving Xn</p>
 <p>Output:</p>
 <p>None, but saving generated n bytes to file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="BBS_gen.BBSgen_body">
-<tt class="descclassname">BBS_gen.</tt><tt class="descname">BBSgen_body</tt><big>(</big><em>x0</em>, <em>p</em>, <em>q</em><big>)</big><a class="headerlink" href="#BBS_gen.BBSgen_body" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">BBS_gen.</tt><tt class="descname">BBSgen_body</tt><big>(</big><em>x</em>, <em>n</em>, <em>mode=1</em><big>)</big><a class="headerlink" href="#BBS_gen.BBSgen_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x - intiger number, seed for generator</p>
+<p>n - intiger, length of generating string of bytes</p>
+<p>mode - integer, 1 for bn - last byte, 2 for bn - xor all bytes, 3 for bn - compare number of bytes, 0 for receiving Xn</p>
+<p>Output:</p>
+<p>string, generated n bytes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="BBS_gen.BBSgen_elem">
+<tt class="descclassname">BBS_gen.</tt><tt class="descname">BBSgen_elem</tt><big>(</big><em>x0</em>, <em>p</em>, <em>q</em><big>)</big><a class="headerlink" href="#BBS_gen.BBSgen_elem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inputs:</p>
 <p>x0 - intiger number, seed for generator</p>
 <p>p,q - integers, constant for generator</p>
@@ -113,6 +160,488 @@
 </dd></dl>
 
 </div>
+<div class="section" id="module-MouseGen">
+<span id="generator-based-on-mouse"></span><h1>Generator based on mouse<a class="headerlink" href="#module-MouseGen" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="MouseGen.MakePoints">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">MakePoints</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#MouseGen.MakePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of creating points</p>
+<p>Output:</p>
+<p>list of coordinades of mouse coursor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.MouseGen">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">MouseGen</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em><big>)</big><a class="headerlink" href="#MouseGen.MouseGen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from coordinates uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.MouseGenB">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">MouseGenB</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em><big>)</big><a class="headerlink" href="#MouseGen.MouseGenB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from polar coordinates uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.MouseGenC">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">MouseGenC</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em><big>)</big><a class="headerlink" href="#MouseGen.MouseGenC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from coordinates changed with map of chaos uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.PozycjaMyszy">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">PozycjaMyszy</tt><big>(</big><big>)</big><a class="headerlink" href="#MouseGen.PozycjaMyszy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>None</p>
+<p>Output:</p>
+<p>list of integers, coordinates of mouse coursor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.SavePoints">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">SavePoints</tt><big>(</big><em>k</em>, <em>n</em><big>)</big><a class="headerlink" href="#MouseGen.SavePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of creating points</p>
+<p>k - integer, number of strings</p>
+<p>Output:</p>
+<p>None, but creates k files with points</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRMGBMultiple">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRMGBMultiple</tt><big>(</big><em>n</em>, <em>filename</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRMGBMultiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, calls function MouseGenB m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRMGCMultiple">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRMGCMultiple</tt><big>(</big><em>n</em>, <em>filename</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRMGCMultiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, calls function MouseGenC m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRMGMultiple">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRMGMultiple</tt><big>(</big><em>n</em>, <em>filename</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRMGMultiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>Output:</p>
+<p>None, calls function MouseGen m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNG2MouseBon">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNG2MouseBon</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em>, <em>j</em><big>)</big><a class="headerlink" href="#MouseGen.TRNG2MouseBon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from LFSR with seed created from coordinates changed by chaos map uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNGM2MouseBon">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNGM2MouseBon</tt><big>(</big><em>n</em>, <em>filename</em>, <em>j</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRNGM2MouseBon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, calls function TRNG2MouseBon m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNGMLB">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNGMLB</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em>, <em>j</em><big>)</big><a class="headerlink" href="#MouseGen.TRNGMLB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from LFSR connected with BBS with seed created from coordinates, uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNGMMLB">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNGMMLB</tt><big>(</big><em>n</em>, <em>filename</em>, <em>j</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRNGMMLB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, calls function TRNGMouseBon m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNGMMouseBon">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNGMMouseBon</tt><big>(</big><em>n</em>, <em>filename</em>, <em>j</em>, <em>m</em><big>)</big><a class="headerlink" href="#MouseGen.TRNGMMouseBon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>filename - string, prefix for name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, calls function TRNGMouseBon m times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TRNGMouseBon">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TRNGMouseBon</tt><big>(</big><em>n</em>, <em>points</em>, <em>filename</em>, <em>j</em><big>)</big><a class="headerlink" href="#MouseGen.TRNGMouseBon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, number of bytes in the end file</p>
+<p>points - list of coordinates</p>
+<p>filename - string, name of file, destination for generated bytes</p>
+<p>j - integer, number of seed&#8217;s bytes</p>
+<p>Output:</p>
+<p>None, list of bytes made from LFSR with seed created from coordinates uploaded to file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MouseGen.TakePoints">
+<tt class="descclassname">MouseGen.</tt><tt class="descname">TakePoints</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#MouseGen.TakePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>filename - string, name of file with saved points</p>
+<p>Output:</p>
+<p>list of coordinates loaded from file</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-generator_mic">
+<span id="generator-based-on-microphone"></span><h1>Generator based on microphone<a class="headerlink" href="#module-generator_mic" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="generator_mic.generuj_plik">
+<tt class="descclassname">generator_mic.</tt><tt class="descname">generuj_plik</tt><big>(</big><em>nazwa_pliku</em><big>)</big><a class="headerlink" href="#generator_mic.generuj_plik" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>nazwa_pliku - string, name of creating file with result</p>
+<p>Output:</p>
+<p>None, but saving generated n bytes to file, function is related with arduino by serial port</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-LFSRiBBS">
+<span id="generator-lfsr-connected-with-bbs"></span><h1>Generator LFSR connected with BBS<a class="headerlink" href="#module-LFSRiBBS" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="LFSRiBBS.lfsribbs_body">
+<tt class="descclassname">LFSRiBBS.</tt><tt class="descname">lfsribbs_body</tt><big>(</big><em>x0</em>, <em>n</em>, <em>k</em><big>)</big><a class="headerlink" href="#LFSRiBBS.lfsribbs_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x0 - intiger number, seed for generator</p>
+<p>n - intiger, length of generating string of bytes</p>
+<p>k - integer, number of bytes in register</p>
+<p>Output:</p>
+<p>string, generated n bytes</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pseudolosowy_afiniczny">
+<span id="generator-lcg"></span><h1>Generator LCG<a class="headerlink" href="#module-pseudolosowy_afiniczny" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pseudolosowy_afiniczny.gen_LCG">
+<tt class="descclassname">pseudolosowy_afiniczny.</tt><tt class="descname">gen_LCG</tt><big>(</big><em>x0</em>, <em>n</em>, <em>file_name</em><big>)</big><a class="headerlink" href="#pseudolosowy_afiniczny.gen_LCG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x0 - intiger number, seed for generator</p>
+<p>n - integer, len of output file</p>
+<p>file_name - string, name of creating file with result</p>
+<p>Output:</p>
+<p>integer - lenght of creating file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pseudolosowy_afiniczny.gen_afi_body">
+<tt class="descclassname">pseudolosowy_afiniczny.</tt><tt class="descname">gen_afi_body</tt><big>(</big><em>x0</em>, <em>a</em>, <em>b</em>, <em>M</em>, <em>n</em><big>)</big><a class="headerlink" href="#pseudolosowy_afiniczny.gen_afi_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x0 - intiger number, seed for generator</p>
+<p>a, b, M - integers, constant for generator</p>
+<p>n - integer, len of output file</p>
+<p>Output:</p>
+<p>string - n bits generated from generator LCG</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pseudolosowy_afiniczny.more_byte">
+<tt class="descclassname">pseudolosowy_afiniczny.</tt><tt class="descname">more_byte</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#pseudolosowy_afiniczny.more_byte" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x - intiger number</p>
+<p>Output:</p>
+<p>string - more frequent bit in binary representation of x</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pseudolosowy_afiniczny.to_bin">
+<tt class="descclassname">pseudolosowy_afiniczny.</tt><tt class="descname">to_bin</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#pseudolosowy_afiniczny.to_bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x - intiger number</p>
+<p>Output:</p>
+<p>string - the representation of x in binaries</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pseudolosowy_afiniczny.xor_byte">
+<tt class="descclassname">pseudolosowy_afiniczny.</tt><tt class="descname">xor_byte</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#pseudolosowy_afiniczny.xor_byte" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>x - intiger number</p>
+<p>Output:</p>
+<p>string - score of operation xor made on bits of binary representation fo x</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-testy">
+<span id="tests-for-randomness"></span><h1>Tests for randomness<a class="headerlink" href="#module-testy" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="testy.Serie">
+<tt class="descclassname">testy.</tt><tt class="descname">Serie</tt><big>(</big><em>plik</em><big>)</big><a class="headerlink" href="#testy.Serie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik - string of 20.000 bytes</p>
+<p>Output:</p>
+<p>dictionary where keys are lenhgts of runs and values are number of runs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy.TestNajdluzszejSerii">
+<tt class="descclassname">testy.</tt><tt class="descname">TestNajdluzszejSerii</tt><big>(</big><em>nazwa</em><big>)</big><a class="headerlink" href="#testy.TestNajdluzszejSerii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik - string of 20.000 bytes</p>
+<p>Output:</p>
+<p>Tuple of strings:</p>
+<p>first element is boolean value &#8220;T&#8221; if test was succesfull &#8220;F&#8221; if test failed
+second element is value of the Test for the Longest Run</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy.TestPojedynczegoBitu">
+<tt class="descclassname">testy.</tt><tt class="descname">TestPojedynczegoBitu</tt><big>(</big><em>plik</em><big>)</big><a class="headerlink" href="#testy.TestPojedynczegoBitu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik - string of 20.000 bytes</p>
+<p>Output:</p>
+<p>Tuple of strings:</p>
+<p>first element is boolean value &#8220;T&#8221; if test was succesfull &#8220;F&#8221; if test failed
+second element is value of the Monobit Test</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy.TestPokerowy">
+<tt class="descclassname">testy.</tt><tt class="descname">TestPokerowy</tt><big>(</big><em>plik</em><big>)</big><a class="headerlink" href="#testy.TestPokerowy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik - string of 20.000 bytes</p>
+<p>Output:</p>
+<p>Tuple of strings:</p>
+<p>first element is boolean value &#8220;T&#8221; if test was succesfull &#8220;F&#8221; if test failed
+second element is value of the Frequency Test within a Block</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy.TestSerii">
+<tt class="descclassname">testy.</tt><tt class="descname">TestSerii</tt><big>(</big><em>plik</em><big>)</big><a class="headerlink" href="#testy.TestSerii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik - string of 20.000 bytes</p>
+<p>Output:</p>
+<p>Tuple of strings:</p>
+<p>first element is boolean value &#8220;T&#8221; if test was succesfull &#8220;F&#8221; if test failed
+second element is value of the Runs Test</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy.generuj_wyniki">
+<tt class="descclassname">testy.</tt><tt class="descname">generuj_wyniki</tt><big>(</big><em>plik_in</em>, <em>plik_out</em>, <em>m</em><big>)</big><a class="headerlink" href="#testy.generuj_wyniki" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik_in - string, name of the file with generated bytes, only the prefix without sumple number</p>
+<p>plik_out - string, name of final file, where will be save the results of tests</p>
+<p>m - number of sumples</p>
+<p>Output:</p>
+<p>None</p>
+</dd></dl>
+
+<span class="target" id="module-testy2"></span><dl class="function">
+<dt id="testy2.ApEntropyTest">
+<tt class="descclassname">testy2.</tt><tt class="descname">ApEntropyTest</tt><big>(</big><em>filein</em>, <em>n</em>, <em>m</em><big>)</big><a class="headerlink" href="#testy2.ApEntropyTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, length of word</p>
+<p>m - integer, length of block</p>
+<p>filein - string of bytes</p>
+<p>Output:</p>
+<p>float, value of Entropy Test</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy2.Entropy">
+<tt class="descclassname">testy2.</tt><tt class="descname">Entropy</tt><big>(</big><em>word</em>, <em>n</em>, <em>m</em><big>)</big><a class="headerlink" href="#testy2.Entropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, length of word</p>
+<p>m - integer, length of block</p>
+<p>word - string of bytes</p>
+<p>Output:</p>
+<p>folat, value of Entropy</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy2.SerialTest">
+<tt class="descclassname">testy2.</tt><tt class="descname">SerialTest</tt><big>(</big><em>filein</em>, <em>n</em>, <em>m</em><big>)</big><a class="headerlink" href="#testy2.SerialTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, length of word</p>
+<p>m - integer, length of block</p>
+<p>filein - string of bytes</p>
+<p>Output:</p>
+<p>Tuple of two float values</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy2.blocks_count">
+<tt class="descclassname">testy2.</tt><tt class="descname">blocks_count</tt><big>(</big><em>n</em>, <em>m</em>, <em>word</em><big>)</big><a class="headerlink" href="#testy2.blocks_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, length of word</p>
+<p>m - integer, length of block</p>
+<p>word - string of bytes</p>
+<p>Output:</p>
+<p>dictionary, where keys are possible blocks and values are number of this blocks in word</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="testy2.psi_calc">
+<tt class="descclassname">testy2.</tt><tt class="descname">psi_calc</tt><big>(</big><em>n</em>, <em>m</em>, <em>word</em><big>)</big><a class="headerlink" href="#testy2.psi_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>n - integer, length of word</p>
+<p>m - integer, length of block</p>
+<p>word - string of bytes</p>
+<p>Output:</p>
+<p>float, value of psi function</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-akceptacja_co_drugi">
+<span id="helpfull-modules"></span><h1>Helpfull modules<a class="headerlink" href="#module-akceptacja_co_drugi" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="akceptacja_co_drugi.akceptacja_co_drugi">
+<tt class="descclassname">akceptacja_co_drugi.</tt><tt class="descname">akceptacja_co_drugi</tt><big>(</big><em>plik_in</em>, <em>plik_out</em><big>)</big><a class="headerlink" href="#akceptacja_co_drugi.akceptacja_co_drugi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik_in - string, name of the file with generated bytes, only the prefix without sumple number</p>
+<p>plik_out - string, name of final file for saving new bytes</p>
+<p>Output:</p>
+<p>None, function call codrugizpliku() 10 times</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="akceptacja_co_drugi.codrugidane">
+<tt class="descclassname">akceptacja_co_drugi.</tt><tt class="descname">codrugidane</tt><big>(</big><em>dane1</em>, <em>dane2</em><big>)</big><a class="headerlink" href="#akceptacja_co_drugi.codrugidane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>dane1 - string of 20000 bytes</p>
+<p>dane2 - string of 20000 bytes</p>
+<p>Output:</p>
+<p>string of bytes made from dane1 and dane2</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="akceptacja_co_drugi.codrugizpliku">
+<tt class="descclassname">akceptacja_co_drugi.</tt><tt class="descname">codrugizpliku</tt><big>(</big><em>input1</em>, <em>input2</em>, <em>output</em><big>)</big><a class="headerlink" href="#akceptacja_co_drugi.codrugizpliku" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>input1 - string, name of the file with generated bytes</p>
+<p>input2 - string, name of the file with generated bytes</p>
+<p>output - string, name of the final file, after changes from chapter 6.1.1</p>
+<p>Output:</p>
+<p>None, function saves new string of bytes in output file</p>
+</dd></dl>
+
+<span class="target" id="module-modify_points"></span><dl class="function">
+<dt id="modify_points.biegunowy">
+<tt class="descclassname">modify_points.</tt><tt class="descname">biegunowy</tt><big>(</big><em>points</em><big>)</big><a class="headerlink" href="#modify_points.biegunowy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>points - list of points [xi, yi]</p>
+<p>Output:</p>
+<p>list of polar variables [ai, bi]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modify_points.biegunowy_body">
+<tt class="descclassname">modify_points.</tt><tt class="descname">biegunowy_body</tt><big>(</big><em>point1</em>, <em>point2</em><big>)</big><a class="headerlink" href="#modify_points.biegunowy_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>points - list with 2 arguments [x, y]</p>
+<p>Output:</p>
+<p>polar variable [a, b]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modify_points.chaos_map">
+<tt class="descclassname">modify_points.</tt><tt class="descname">chaos_map</tt><big>(</big><em>points</em><big>)</big><a class="headerlink" href="#modify_points.chaos_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>points - list of lists with 2 arguments [xi, yi]</p>
+<p>Output:</p>
+<p>list of lists with 2 arguments [ai, bi] after chaotic mapping</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modify_points.chaos_map_body">
+<tt class="descclassname">modify_points.</tt><tt class="descname">chaos_map_body</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#modify_points.chaos_map_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>points - list with 2 arguments [x, y]</p>
+<p>Output:</p>
+<p>list with 2 arguments [a, b] after chaotic mapping</p>
+</dd></dl>
+
+<span class="target" id="module-naprawa_danych"></span><dl class="function">
+<dt id="naprawa_danych.napraw_plik">
+<tt class="descclassname">naprawa_danych.</tt><tt class="descname">napraw_plik</tt><big>(</big><big>)</big><a class="headerlink" href="#naprawa_danych.napraw_plik" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>None</p>
+<p>Output:</p>
+<p>None, function is repairing file from serial port to be usefull for RNG</p>
+</dd></dl>
+
+<span class="target" id="module-xorowanie"></span><dl class="function">
+<dt id="xorowanie.xordane">
+<tt class="descclassname">xorowanie.</tt><tt class="descname">xordane</tt><big>(</big><em>dane1</em>, <em>dane2</em><big>)</big><a class="headerlink" href="#xorowanie.xordane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>dane1 - string with 20000 bytes</p>
+<p>dane2 - string with 20000 bytes</p>
+<p>Output:</p>
+<p>string with 20000 bytes made from dane1 and dane2 by using xor on bytes bi from both of strings</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="xorowanie.xorowanie">
+<tt class="descclassname">xorowanie.</tt><tt class="descname">xorowanie</tt><big>(</big><em>plik_in</em>, <em>plik_out</em><big>)</big><a class="headerlink" href="#xorowanie.xorowanie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>plik_in - string, prefix for name of input file</p>
+<p>plik_out - string, prefix for name of input file</p>
+<p>Output:</p>
+<p>None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="xorowanie.xorpliki">
+<tt class="descclassname">xorowanie.</tt><tt class="descname">xorpliki</tt><big>(</big><em>input1</em>, <em>input2</em>, <em>output</em><big>)</big><a class="headerlink" href="#xorowanie.xorpliki" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs:</p>
+<p>input1 - string, name of input file</p>
+<p>input2 - string, name of input file</p>
+<p>output - string, name of output file</p>
+<p>Output:</p>
+<p>None, but saving to output file string with 20000 bytes made from dane1 and dane2 by using xor on bytes bi from both of strings</p>
+</dd></dl>
+
+</div>
 
 
           </div>
@@ -122,9 +651,16 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Wygenerowana automatycznie dokumentacja</a></li>
+<li><a class="reference internal" href="#">Documantation</a></li>
+<li><a class="reference internal" href="#module-TRNG">True Random Number Generator</a></li>
 <li><a class="reference internal" href="#module-BBS_gen">Generator BBS</a></li>
 <li><a class="reference internal" href="#module-lfsr">Generator LFSR</a></li>
+<li><a class="reference internal" href="#module-MouseGen">Generator based on mouse</a></li>
+<li><a class="reference internal" href="#module-generator_mic">Generator based on microphone</a></li>
+<li><a class="reference internal" href="#module-LFSRiBBS">Generator LFSR connected with BBS</a></li>
+<li><a class="reference internal" href="#module-pseudolosowy_afiniczny">Generator LCG</a></li>
+<li><a class="reference internal" href="#module-testy">Tests for randomness</a></li>
+<li><a class="reference internal" href="#module-akceptacja_co_drugi">Helpfull modules</a></li>
 </ul>
 
   <h4>Previous topic</h4>

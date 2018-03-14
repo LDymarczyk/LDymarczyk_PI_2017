@@ -1,4 +1,4 @@
-import serial, string
+#import serial, string
 from time import sleep
 
 def generuj_plik(nazwa_pliku):
