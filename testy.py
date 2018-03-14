@@ -154,7 +154,7 @@ def generuj_wyniki(plik_in, plik_out, m):
 ##generuj_wyniki('grailfsr/LFSRgame','grailfsr/LFSRgameout.txt',20)
 ##generuj_wyniki('lfsribbs/LFSRiBBS','lfsribbs/LFSRiBBSout.txt',1)
 ##generuj_wyniki('grailfsribbs/LFSRBBSgame','grailfsribbs/LFSRBBSgameout',20)
-generuj_wyniki("wbudowane/gen_wb_pyt","wbudowane/gen_wb_pytout",20)
+##generuj_wyniki("wbudowane/gen_wb_pyt","wbudowane/gen_wb_pytout",20)
 ##generuj_wyniki("bbs/2BBSmb","bbs/2BBSmbout",1)
 ##generuj_wyniki("bbs/BBSxb","bbs/BBSxbout",1)
 ##generuj_wyniki("bbs/BBSsb","bbs/BBSsbout",1)

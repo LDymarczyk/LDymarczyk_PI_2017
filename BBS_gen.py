@@ -2,11 +2,11 @@ from pseudolosowy_afiniczny import xor_byte, more_byte
 
 def BBSgen_body(x0, p, q):
     """
-    Inputs:
-    x0 - intiger number, seed for generator
-    p,q - integers, constant for generator
-    ------------------
-    Output:
+    Inputs:\n
+    x0 - intiger number, seed for generator\n
+    p,q - integers, constant for generator\n
+    ------------------\n
+    Output:\n
     List of strings - next integer for generator and byte generated on 3 ways
     """
     M = p*q
@@ -16,13 +16,13 @@ def BBSgen_body(x0, p, q):
 
 def BBSgen(x, n, k, file_name):
     """
-    Inputs:
-    x - intiger number, seed for generator
-    n - intiger, length of generating string of bytes
-    k - string, number added at the end of file name
-    file_name - string, name of creating file with result
-    ------------------
-    Output:
+    Inputs:\n
+    x - intiger number, seed for generator\n
+    n - intiger, length of generating string of bytes\n
+    k - string, number added at the end of file name\n
+    file_name - string, name of creating file with result\n
+    ------------------\n
+    Output:\n
     None, but saving generated n bytes to file
     """
     begin = x
