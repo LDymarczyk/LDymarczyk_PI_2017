@@ -1,9 +1,9 @@
 def to_bin(x):
     """
-    Inputs:
-    x - intiger number
-    ------------------
-    Output:
+    Inputs:\n
+    x - intiger number\n
+    ------------------\n
+    Output:\n
     string - the representation of x in binaries
     """
     a=""
@@ -14,10 +14,10 @@ def to_bin(x):
 
 def more_byte(x):
     """
-    Inputs:
-    x - intiger number
-    ------------------
-    Output:
+    Inputs:\n
+    x - intiger number\n
+    ------------------\n
+    Output:\n
     string - more frequent bit in binary representation of x
     """
     x=bin(x)[2:]
@@ -32,10 +32,10 @@ def more_byte(x):
 
 def xor_byte(x):
     """
-    Inputs:
-    x - intiger number
-    ------------------
-    Output:
+    Inputs:\n
+    x - intiger number\n
+    ------------------\n
+    Output:\n
     string - score of operation xor made on bits of binary representation fo x
     """
     x = bin(x)[2:]
@@ -49,12 +49,12 @@ def xor_byte(x):
 
 def gen_afi_body(x0, a, b, M, n):
     """
-    Inputs:
-    x0 - intiger number, seed for generator
-    a, b, M - integers, constant for generator
-    n - integer, len of output file
-    ------------------
-    Output:
+    Inputs:\n
+    x0 - intiger number, seed for generator\n
+    a, b, M - integers, constant for generator\n
+    n - integer, len of output file\n
+    ------------------\n
+    Output:\n
     string - n bits generated from generator LCG
     """
     begin = x0
@@ -69,12 +69,12 @@ def gen_afi_body(x0, a, b, M, n):
 
 def gen_LCG(x0, n, file_name):
     """
-    Inputs:
-    x0 - intiger number, seed for generator
-    n - integer, len of output file
-    file_name - string, name of creating file with result
-    ------------------
-    Output:
+    Inputs:\n
+    x0 - intiger number, seed for generator\n
+    n - integer, len of output file\n
+    file_name - string, name of creating file with result\n
+    ------------------\n
+    Output:\n
     integer - lenght of creating file
     """
     out = gen_afi_body(x0,872323,7949,2097152,n)
