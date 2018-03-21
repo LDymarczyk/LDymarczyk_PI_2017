@@ -50,12 +50,12 @@ def TRNGalg(n, j, k):
         
 def TRNG(m, k = 1):
     """
-    Inputs:\n
-    m - intiger, 2^m will be upper range of generated values\n
-    k - integer, number of generated values\n
-    m * k < 20.001\n
-    ------------------\n
-    Output:\n
+    Inputs:
+    m - intiger, 2^m will be upper range of generated values
+    k - integer, number of generated values
+    m * k < 20.001
+    ------------------
+    Output:
     list of x integers
     """
     print ("=========================\nProsimy o poruszanie kursorem\n=========================")

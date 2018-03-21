@@ -1,4 +1,4 @@
-#from ctypes import windll, Structure, c_long, byref
+from ctypes import windll, Structure, c_long, byref
 from pseudolosowy_afiniczny import xor_byte, more_byte
 from LFSRiBBS import lfsribbs_body
 from lfsr import genLFSR
@@ -6,8 +6,8 @@ from math import ceil
 from modify_points import biegunowy, chaos_map
 import time
 
-#class Punkt(Structure):
-#    _fields_ = [("x", c_long), ("y", c_long)]
+class Punkt(Structure):
+    _fields_ = [("x", c_long), ("y", c_long)]
 
 def PozycjaMyszy():
     """

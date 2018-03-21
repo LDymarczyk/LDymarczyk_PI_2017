@@ -145,13 +145,13 @@ if __name__ == '__main__':
 ##    generuj_wyniki("mic_xor/plik_mic_xor","mic_xor/dane_mic_xor",10)
 ##    generuj_wyniki("mic_codrugi/plik_mic_codrugi","mic_codrugi/dane_mic_codrugi",10)
 
-    generuj_wyniki("trng/TRNG","trng/TRNG_out",10)
-        
+##    generuj_wyniki("trng/TRNG","trng/TRNG_out",10)
+
+##    generuj_wyniki("lfsribbs/LFSRiBBS","lfsribbs/LFSRiBBSout",20)
+##    generuj_wyniki("afiniczny/af_more","afiniczny/af_more_out",20)
+    generuj_wyniki("afiniczny/af_xor","afiniczny/af_xor_out",20)
+##        
     ##generuj_wyniki("lfsr/LFSR","lfsr/lsfrout",1)
-    ##generuj_wyniki('grailfsr/LFSRgame','grailfsr/LFSRgameout.txt',20)
-    ##generuj_wyniki('lfsribbs/LFSRiBBS','lfsribbs/LFSRiBBSout.txt',20)
-    ##generuj_wyniki('grailfsribbs/LFSRBBSgame','grailfsribbs/LFSRBBSgameout',20)
-    ##generuj_wyniki("wbudowane/gen_wb_pyt","wbudowane/gen_wb_pytout",20)
         
     ##generuj_wyniki("mouse/Mouse1Clear","mouse/zMouse1out",20)
     ##generuj_wyniki("mouse/Mouse2Clear","mouse/zMouse2out",20)

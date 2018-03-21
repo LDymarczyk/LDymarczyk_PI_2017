@@ -1,0 +1,11 @@
+	PojBit	Pok	TS	NS	ST	ApEn
+1	T	F	F	T	F	F
+2	T	F	F	T	F	F
+3	T	F	F	T	F	F
+4	T	F	F	T	F	F
+5	T	F	F	T	F	F
+6	T	F	F	T	F	F
+7	T	F	F	T	F	F
+8	T	F	F	T	F	F
+9	T	F	F	T	F	F
+10	T	F	F	T	F	F

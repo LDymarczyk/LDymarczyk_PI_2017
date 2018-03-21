@@ -61,7 +61,7 @@ def gen_afi_body(x0, a, b, M, n):
     out = ""
     for i in range(n):
         xn = (a * x0 + b) % M
-        out += more_bite(xn)
+        out += xor_byte(xn)
         x0 = xn
         if x0 == begin:
             print i
@@ -77,12 +77,12 @@ def gen_LCG(x0, n, file_name):
     Output:\n
     integer - lenght of creating file
     """
-    out = gen_afi_body(x0,872323,7949,2097152,n)
+    out = gen_afi_body(x0,pow(2,10)+1,7949,pow(2,20),n)
     file_out = open(file_name,'w')
     file_out.write(out[1:])
     file_out.close()
 
 if __name__ == '__main__':
     for i in range(20):
-        gen_LCG(i,20000,"afiniczny/af_more"+str(i+1)+".txt")
-    gen_LCG(1,1000000,"afiniczny/af_more_for_test_walk.txt")
+        gen_LCG(i,20001,"afiniczny/af_xor"+str(i+1)+".txt")
+
